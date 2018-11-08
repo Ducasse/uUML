@@ -24,6 +24,17 @@ UMLClass class >> <~ aString [
 ]
 
 { #category : #example }
+UMLClass class >> comixSerie [
+	<sampleInstance>
+	
+	| uUMLClass |
+	uUMLClass := UMLClass named: 'ComixSerie'.
+	uUMLClass instVar: 'name'.
+	uUMLClass instVar: 'ongoing'.
+	^ uUMLClass
+]
+
+{ #category : #example }
 UMLClass class >> myself [
 	<sampleInstance>
 	
