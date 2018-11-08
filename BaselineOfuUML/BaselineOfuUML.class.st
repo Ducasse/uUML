@@ -8,5 +8,11 @@ Class {
 BaselineOfuUML >> baseline: spec [
 	<baseline>
 	
-	self package: #'uUML'
+	spec 
+		baseline: 'UniqueOrdered' with: [
+				spec repository: 'github://Ducasse/Containers-UniqueOrdered/src'
+				].	
+	spec 
+		package: #'uUML' 
+		with: [ spec requires: #(#'UniqueOrdered') ]
 ]

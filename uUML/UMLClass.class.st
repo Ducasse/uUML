@@ -48,6 +48,12 @@ UMLClass class >> named: aString [
 	^ self new name: aString ; yourself
 ]
 
+{ #category : #inheritance }
+UMLClass >> extends: aClass [
+	"Add myself to the subclass of aClass"
+	aClass subclass: self
+]
+
 { #category : #testing }
 UMLClass >> includesOperation: aString [ 
 	^ operations includes: aString
@@ -62,11 +68,11 @@ UMLClass >> includesVariable: aString [
 UMLClass >> initialize [
 
 	super initialize. 
-	variables := OrderedCollection new. 
-	operations := OrderedCollection new.
+	variables := CTUniqueOrderedCollection new. 
+	operations := CTUniqueOrderedCollection new.
 ]
 
-{ #category : #variables }
+{ #category : #'variables / operations' }
 UMLClass >> instVar: aString [ 
 	"Add a new class"
 	variables add: aString
@@ -82,7 +88,7 @@ UMLClass >> name: aString [
 	name := aString
 ]
 
-{ #category : #variables }
+{ #category : #'variables / operations' }
 UMLClass >> operation: aString [ 
 	"Add a new method named aString"
 	operations add: aString
@@ -98,6 +104,7 @@ UMLClass >> operations [
 UMLClass >> printOn: aStream [
 
 	aStream 
+		nextPutAll: 'u~';
 		nextPutAll: name;
 		cr
 ]
