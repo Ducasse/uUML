@@ -14,5 +14,5 @@ BaselineOfuUML >> baseline: spec [
 				].	
 	spec 
 		package: #'uUML' 
-		with: [ spec requires: #(#'UniqueOrdered') ]
+		with: [ spec requires: #(#'ContainersUniqueOrdered') ]
 ]
