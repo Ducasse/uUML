@@ -9,7 +9,7 @@ BaselineOfuUML >> baseline: spec [
 	<baseline>
 	
 	spec 
-		baseline: 'UniqueOrdered' with: [
+		baseline: 'ContainersUniqueOrdered' with: [
 				spec repository: 'github://Ducasse/Containers-UniqueOrdered/'
 				].	
 	spec 
