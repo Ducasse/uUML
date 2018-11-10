@@ -46,7 +46,27 @@ MUMLTest >> testDefineSimpleHierarchy [
 				instVar: 'label'.
 	
 	child extends: root.
-	self assert: (root includesSubclass: child)
+	self assert: (root includesSubclass: child).
+	self assert: child superclass equals: root. 
+	
+	
+	
+]
+
+{ #category : #tests }
+MUMLTest >> testDefineSimpleHierarchyHandlingDouble [
+
+	| root child |
+	root := UMLClass <~ 'PRElement'
+				instVar: 'contents'.
+	
+	child := UMLClass <~ 'PRParagraph'
+				instVar: 'label'.
+	
+	child extends: root.
+	child extends: root.
+	self assert: root subclasses size equals: 1.
+	self assert: child superclass equals: root. 
 	
 	
 	

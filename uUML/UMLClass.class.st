@@ -13,7 +13,9 @@ Class {
 	#instVars : [
 		'variables',
 		'operations',
-		'name'
+		'subclasses',
+		'name',
+		'superclass'
 	],
 	#category : #uUML
 }
@@ -51,12 +53,18 @@ UMLClass class >> named: aString [
 { #category : #inheritance }
 UMLClass >> extends: aClass [
 	"Add myself to the subclass of aClass"
-	aClass subclass: self
+	aClass subclasses add: self.
+	self superclass: aClass.
 ]
 
 { #category : #testing }
 UMLClass >> includesOperation: aString [ 
 	^ operations includes: aString
+]
+
+{ #category : #testing }
+UMLClass >> includesSubclass: aString [ 
+	^ subclasses includes: aString
 ]
 
 { #category : #testing }
@@ -70,6 +78,8 @@ UMLClass >> initialize [
 	super initialize. 
 	variables := CTUniqueOrderedCollection new. 
 	operations := CTUniqueOrderedCollection new.
+	subclasses := CTUniqueOrderedCollection new.
+	
 ]
 
 { #category : #'variables / operations' }
@@ -107,6 +117,27 @@ UMLClass >> printOn: aStream [
 		nextPutAll: 'u~';
 		nextPutAll: name;
 		cr
+]
+
+{ #category : #inheriting }
+UMLClass >> subclass: anUMLClass [ 
+	
+]
+
+{ #category : #accessing }
+UMLClass >> subclasses [ 
+	^ subclasses
+]
+
+{ #category : #accessing }
+UMLClass >> superclass [
+	^ superclass
+]
+
+{ #category : #inheritance }
+UMLClass >> superclass: aClass [
+
+	superclass := aClass
 ]
 
 { #category : #accessing }
