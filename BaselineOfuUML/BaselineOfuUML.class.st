@@ -13,6 +13,10 @@ BaselineOfuUML >> baseline: spec [
 				spec repository: 'github://Ducasse/Containers-UniqueOrdered/src'
 				].	
 	spec 
+		baseline: 'ContainersOrderedMultiMap' with: [
+				spec repository: 'github://Ducasse/Containers-OrderedMultimap/src'
+				].				
+	spec 
 		package: #'uUML' 
-		with: [ spec requires: #(#'ContainersUniqueOrdered') ]
+		with: [ spec requires: #(#'ContainersUniqueOrdered' #'ContainersOrderedMultiMap') ]
 ]

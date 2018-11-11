@@ -9,21 +9,15 @@ UMLClass <~ 'UMLClass'
 "
 Class {
 	#name : #UMLClass,
-	#superclass : #Object,
+	#superclass : #UMLNamedEntity,
 	#instVars : [
 		'variables',
 		'operations',
 		'subclasses',
-		'name',
 		'superclass'
 	],
 	#category : #uUML
 }
-
-{ #category : #'instance creation' }
-UMLClass class >> <~ aString [ 
-	^ self new name: aString ; yourself
-]
 
 { #category : #example }
 UMLClass class >> comixSerie [
@@ -43,11 +37,6 @@ UMLClass class >> myself [
 	^ (UMLClass named: 'UMLClass')
 		instVar: 'variables';
 		instVar: 'operations'
-]
-
-{ #category : #'instance creation' }
-UMLClass class >> named: aString [ 
-	^ self new name: aString ; yourself
 ]
 
 { #category : #inheritance }
@@ -86,16 +75,6 @@ UMLClass >> initialize [
 UMLClass >> instVar: aString [ 
 	"Add a new class"
 	variables add: aString
-]
-
-{ #category : #accessing }
-UMLClass >> name [
-	^ name
-]
-
-{ #category : #accessing }
-UMLClass >> name: aString [ 
-	name := aString
 ]
 
 { #category : #'variables / operations' }

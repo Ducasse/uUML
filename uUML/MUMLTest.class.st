@@ -5,6 +5,23 @@ Class {
 }
 
 { #category : #tests }
+MUMLTest >> testAssociationWith [ 
+
+	| lab student follows |
+	lab := UMLClass <~ 'Lab'
+				instVar: 'topic'.
+	
+	student := UMLClass <~ 'Student'
+					instVar: 'ID'.
+	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
+			
+	follows := UMLAssociation <~ 'enrolment'
+						for: student atLeast: 2;
+						for: lab range: (6 to: 8).
+						
+]
+
+{ #category : #tests }
 MUMLTest >> testDefineASimpleClass [
 
 	| uUMLClass |
