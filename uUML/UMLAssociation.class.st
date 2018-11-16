@@ -10,6 +10,8 @@ Class {
 { #category : #collaborations }
 UMLAssociation >> between: anUMLClass and: anotherUMLClass [
 
+	anUMLClass associationAt: anotherUMLClass add: self.
+	anotherUMLClass associationAt: anUMLClass add: self.
 	ends add: anUMLClass.
 	ends add: anotherUMLClass.
 ]
