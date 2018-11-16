@@ -14,7 +14,8 @@ Class {
 		'variables',
 		'operations',
 		'subclasses',
-		'superclass'
+		'superclass',
+		'associations'
 	],
 	#category : #uUML
 }
@@ -37,6 +38,12 @@ UMLClass class >> myself [
 	^ (UMLClass named: 'UMLClass')
 		instVar: 'variables';
 		instVar: 'operations'
+]
+
+{ #category : #associations }
+UMLClass >> associationAt: anUMLClass add: aRelation [
+
+	associations at: anUMLClass name add: aRelation
 ]
 
 { #category : #inheritance }
@@ -68,6 +75,7 @@ UMLClass >> initialize [
 	variables := CTUniqueOrderedCollection new. 
 	operations := CTUniqueOrderedCollection new.
 	subclasses := CTUniqueOrderedCollection new.
+	associations := CTOrderedMultiMap new.
 	
 ]
 
@@ -98,7 +106,7 @@ UMLClass >> printOn: aStream [
 		cr
 ]
 
-{ #category : #inheriting }
+{ #category : #inheritance }
 UMLClass >> subclass: anUMLClass [ 
 	
 ]

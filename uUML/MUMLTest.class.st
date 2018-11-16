@@ -111,3 +111,21 @@ MUMLTest >> testDefineSimpleHierarchyHandlingDouble2 [
 	
 	
 ]
+
+{ #category : #tests }
+MUMLTest >> testSimpleAssociation [ 
+
+	| lab student follows |
+	lab := UMLClass <~ 'Lab'
+				instVar: 'topic'.
+	
+	student := UMLClass <~ 'Student'
+					instVar: 'ID'.
+	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
+			
+	follows := UMLAssociation <~ 'enrolment'.
+	follows between: student and: lab.
+	
+	self assert: (follows	ends includes: student).			
+	self assert: (follows	ends includes: lab).			
+]
