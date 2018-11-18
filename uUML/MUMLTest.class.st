@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-MUMLTest >> testAssociationWith [ 
+MUMLTest >> testAssociationManyToMany [
 
 	| lab student follows |
 	lab := UMLClass <~ 'Lab'
@@ -16,8 +16,77 @@ MUMLTest >> testAssociationWith [
 	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
 			
 	follows := UMLAssociation <~ 'enrolment'
+						many: student toMany: lab.
+				
+	self assert: (follows endForName: lab name) entity name equals: 'Lab'.
+	self assert: (follows endForName: lab name) multiplicity equals: '*'.
+	
+	self assert: (follows endForName: student name) entity name equals: 'Student'.			
+	self assert: (follows endForName: student name) multiplicity equals: '*'.
+	
+	self assert: ((lab relationsWith: student name) includes: follows).	
+	self assert: ((student relationsWith: lab name) includes: follows).	
+
+	
+	
+						
+]
+
+{ #category : #tests }
+MUMLTest >> testAssociationOneToMany [
+
+	| lab student follows |
+	lab := UMLClass <~ 'Lab'
+				instVar: 'topic'.
+	
+	student := UMLClass <~ 'Student'
+					instVar: 'ID'.
+	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
+			
+	follows := UMLAssociation <~ 'enrolment'
+						one: student toMany: lab.
+				
+	self assert: (follows endForName: lab name) entity name equals: 'Lab'.
+	self assert: (follows endForName: lab name) multiplicity equals: '*'.
+	
+	self assert: (follows endForName: student name) entity name equals: 'Student'.			
+	self assert: (follows endForName: student name) multiplicity equals: '1'.
+	
+	self assert: ((lab relationsWith: student name) includes: follows).	
+	self assert: ((student relationsWith: lab name) includes: follows).	
+
+	
+	
+						
+]
+
+{ #category : #tests }
+MUMLTest >> testAssociationRangeAndLeast [ 
+
+	| lab student follows |
+	lab := UMLClass <~ 'Lab'
+				instVar: 'topic'.
+	
+	student := UMLClass <~ 'Student'
+					instVar: 'ID'.
+	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
+			
+	follows := UMLAssociation <~ 'enrolment'
+						between: student and: lab;
 						for: student atLeast: 2;
 						for: lab range: (6 to: 8).
+				
+	self assert: (follows endForName: lab name) entity name equals: 'Lab'.
+	self assert: (follows endForName: lab name) multiplicity equals: (6 to: 8).
+	
+	self assert: (follows endForName: student name) entity name equals: 'Student'.			
+	self assert: (follows endForName: student name) multiplicity equals: '2..*'.
+	
+	self assert: ((lab relationsWith: student name) includes: follows).	
+	self assert: ((student relationsWith: lab name) includes: follows).	
+
+	
+	
 						
 ]
 
@@ -118,14 +187,17 @@ MUMLTest >> testSimpleAssociation [
 	| lab student follows |
 	lab := UMLClass <~ 'Lab'
 				instVar: 'topic'.
-	
 	student := UMLClass <~ 'Student'
 					instVar: 'ID'.
-	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
-			
+					
 	follows := UMLAssociation <~ 'enrolment'.
 	follows between: student and: lab.
 	
-	self assert: (follows	ends includes: student).			
-	self assert: (follows	ends includes: lab).			
+	self assert: (follows endForName: lab name) entity name equals: 'Lab'.
+	self assert: (follows endForName: student name) entity name equals: 'Student'.		
+	
+	self assert: ((lab relationsWith: student name) includes: follows).
+	self assert: ((student relationsWith: lab name) includes: follows).
+	
+
 ]

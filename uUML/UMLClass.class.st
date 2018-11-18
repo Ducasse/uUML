@@ -85,6 +85,12 @@ UMLClass >> instVar: aString [
 	variables add: aString
 ]
 
+{ #category : #associations }
+UMLClass >> isInRelationWith: aName [
+
+	
+]
+
 { #category : #'variables / operations' }
 UMLClass >> operation: aString [ 
 	"Add a new method named aString"
@@ -104,6 +110,14 @@ UMLClass >> printOn: aStream [
 		nextPutAll: 'u~';
 		nextPutAll: name;
 		cr
+]
+
+{ #category : #associations }
+UMLClass >> relationsWith: aName [
+
+	^ associations allAt: aName ifAbsent: [ #() ]
+
+	
 ]
 
 { #category : #inheritance }
