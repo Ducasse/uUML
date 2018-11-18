@@ -1,20 +1,28 @@
 Class {
 	#name : #MUMLTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'lab',
+		'student'
+	],
 	#category : #uUML
 }
 
-{ #category : #tests }
-MUMLTest >> testAssociationManyToMany [
+{ #category : #'tests associations' }
+MUMLTest >> setUp [
 
-	| lab student follows |
 	lab := UMLClass <~ 'Lab'
 				instVar: 'topic'.
 	
 	student := UMLClass <~ 'Student'
 					instVar: 'ID'.
-	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
-			
+	
+]
+
+{ #category : #'tests associations' }
+MUMLTest >> testAssociationManyToMany [
+
+	| follows |
 	follows := UMLAssociation <~ 'enrolment'
 						many: student toMany: lab.
 				
@@ -32,17 +40,10 @@ MUMLTest >> testAssociationManyToMany [
 						
 ]
 
-{ #category : #tests }
+{ #category : #'tests associations' }
 MUMLTest >> testAssociationOneToMany [
 
-	| lab student follows |
-	lab := UMLClass <~ 'Lab'
-				instVar: 'topic'.
-	
-	student := UMLClass <~ 'Student'
-					instVar: 'ID'.
-	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
-			
+	| follows |
 	follows := UMLAssociation <~ 'enrolment'
 						one: student toMany: lab.
 				
@@ -60,17 +61,11 @@ MUMLTest >> testAssociationOneToMany [
 						
 ]
 
-{ #category : #tests }
+{ #category : #'tests associations' }
 MUMLTest >> testAssociationRangeAndLeast [ 
 
-	| lab student follows |
-	lab := UMLClass <~ 'Lab'
-				instVar: 'topic'.
-	
-	student := UMLClass <~ 'Student'
-					instVar: 'ID'.
+	| follows |
 	"a student can only enrol in 6 to 8 labs and a lab requires at least 2 students"
-			
 	follows := UMLAssociation <~ 'enrolment'
 						between: student and: lab;
 						for: student atLeast: 2;
@@ -181,15 +176,10 @@ MUMLTest >> testDefineSimpleHierarchyHandlingDouble2 [
 	
 ]
 
-{ #category : #tests }
+{ #category : #'tests associations' }
 MUMLTest >> testSimpleAssociation [ 
 
-	| lab student follows |
-	lab := UMLClass <~ 'Lab'
-				instVar: 'topic'.
-	student := UMLClass <~ 'Student'
-					instVar: 'ID'.
-					
+	| follows |
 	follows := UMLAssociation <~ 'enrolment'.
 	follows between: student and: lab.
 	
